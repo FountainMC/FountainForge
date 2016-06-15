@@ -1,0 +1,17 @@
+[
+    {
+        "modid": "fountain",
+        "name": "FountainForge",
+        "description": "The Minecraft Forge implementation of FountainAPI",
+        "version": "$version",
+        "credits": "Copyright (C) FountainMC",
+        "logoFile": "",
+        "mcversion": "$minecraftVersion",
+        "url": "$url",
+        "updateUrl": "",
+        "authors": [ "FountainMC" ],
+        "parent":"",
+        "screenshots": [],
+        "dependencies": []
+    }
+]

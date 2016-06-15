@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "minVersion": "0.4.19",
+    "package": "org.fountainmc.forge.mixin",
+    "refmap": "mixins.fountain.refmap.json",
+    "mixins": [
+
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

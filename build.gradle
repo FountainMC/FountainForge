@@ -11,6 +11,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.3-SNAPSHOT'
     }
 }
 
@@ -23,6 +24,7 @@ plugins {
     id 'net.minecrell.licenser' version '0.2.1'
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
 
 defaultTasks 'clean', 'licenseFormat'
 
@@ -32,16 +34,26 @@ targetCompatibility = 1.8
 group = 'org.fountainmc'
 archivesBaseName = project.name.toLowerCase()
 version = '1.9.4-alpha1-SNAPSHOT'
+ext.url = 'https://fountainmc.org/'
 
 repositories {
     mavenCentral()
     maven {
         url 'https://repo.techcable.net/content/groups/public/'
     }
+    maven {
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
+    }
 }
 
 dependencies {
     compile "org.fountainmc:fountain-api:${project.version}"
+
+    compile('org.spongepowered:mixin:0.5.1-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+    }
 }
 
 minecraft {
@@ -49,12 +61,33 @@ minecraft {
     mappings = 'snapshot_20160518'
 
     runDir = 'run'
+
+    coreMod = 'org.fountainmc.forge.FountainCoremod'
 }
 
 license {
     header file('HEADER.txt')
     include '**/*.java'
     include '**/*.groovy'
+}
+
+sourceSets {
+    main {
+        refMap = 'mixins.fountain.refmap.json'
+    }
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'mcmod.info'
+
+        expand(
+                version: project.version,
+                url: project.url,
+                minecraftVersion: '1.9.4',
+                forgeVersion: '12.17.0.1963'
+        )
+    }
 }
 
 task wrapper(type: Wrapper) {
