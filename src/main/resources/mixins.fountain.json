@@ -4,7 +4,8 @@
     "package": "org.fountainmc.forge.mixin",
     "refmap": "mixins.fountain.refmap.json",
     "mixins": [
-
+        "entity.MixinEntity",
+        "world.MixinWorld"
     ],
     "injectors": {
         "defaultRequire": 1
