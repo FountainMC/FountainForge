@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+        maven {
+            name = 'sponge'
+            url = 'http://repo.spongepowered.org/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'java'
+
+    id 'idea'
+    id 'eclipse'
+
+    id 'net.minecrell.licenser' version '0.2.1'
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+defaultTasks 'clean', 'licenseFormat'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = 'org.fountainmc'
+archivesBaseName = project.name.toLowerCase()
+version = '1.9.4-alpha1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.techcable.net/content/groups/public/'
+    }
+}
+
+dependencies {
+    compile "org.fountainmc:fountain-api:${project.version}"
+}
+
+minecraft {
+    version = '12.17.0.1963'
+    mappings = 'snapshot_20160518'
+
+    runDir = 'run'
+}
+
+license {
+    header file('HEADER.txt')
+    include '**/*.java'
+    include '**/*.groovy'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
