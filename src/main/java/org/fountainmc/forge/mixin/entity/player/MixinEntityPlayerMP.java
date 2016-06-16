@@ -26,6 +26,8 @@ package org.fountainmc.forge.mixin.entity.player;
 
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.TextComponentString;
 import org.fountainmc.api.entity.Player;
@@ -37,7 +39,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(net.minecraft.entity.player.EntityPlayerMP.class)
 @Implements(@Interface(iface = Player.class, prefix = "player$"))
-public abstract class MixinEntityPlayerMP implements ICommandSender {
+public abstract class MixinEntityPlayerMP implements Player, ICommandSender {
 
     @Shadow
     public abstract String shadow$getName();
@@ -50,15 +52,17 @@ public abstract class MixinEntityPlayerMP implements ICommandSender {
         return this.shadow$getName();
     }
 
-    public UUID player$getUUID() {
+    @Override
+    @Nonnull
+    public UUID getUUID() {
         return this.shadow$getUniqueID();
     }
 
-    public void player$sendMessage(String s) {
-        this.player$sendMessages(s);
+    public void sendMessage(String s) {
+        this.sendMessages(s);
     }
 
-    public void player$sendMessages(String... messages) {
+    public void sendMessages(String... messages) {
         for (String message : messages) {
             this.addChatMessage(new TextComponentString(message));
         }
