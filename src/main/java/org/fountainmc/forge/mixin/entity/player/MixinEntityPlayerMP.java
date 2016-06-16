@@ -26,17 +26,18 @@ package org.fountainmc.forge.mixin.entity.player;
 
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.TextComponentString;
 import org.fountainmc.api.entity.Player;
+import org.spongepowered.asm.mixin.Implements;
+import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(net.minecraft.entity.player.EntityPlayerMP.class)
-public abstract class MixinEntityPlayerMP implements Player, ICommandSender {
+@Implements(@Interface(iface = Player.class, prefix = "player$"))
+public abstract class MixinEntityPlayerMP implements ICommandSender {
 
     @Shadow
     public abstract String shadow$getName();
@@ -44,26 +45,20 @@ public abstract class MixinEntityPlayerMP implements Player, ICommandSender {
     @Shadow
     public abstract UUID shadow$getUniqueID();
 
-    @Nonnull
-    @Override
-    public String getName() {
+    @Intrinsic
+    public String player$getName() {
         return this.shadow$getName();
     }
 
-    @Intrinsic
-    @Nonnull
-    @Override
-    public UUID getUUID() {
+    public UUID player$getUUID() {
         return this.shadow$getUniqueID();
     }
 
-    @Override
-    public void sendMessage(String s) {
-        sendMessages(s);
+    public void player$sendMessage(String s) {
+        this.player$sendMessages(s);
     }
 
-    @Override
-    public void sendMessages(String... messages) {
+    public void player$sendMessages(String... messages) {
         for (String message : messages) {
             this.addChatMessage(new TextComponentString(message));
         }
