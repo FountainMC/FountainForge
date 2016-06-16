@@ -10,7 +10,7 @@
         "url": "$url",
         "updateUrl": "",
         "authors": [ "FountainMC" ],
-        "parent":"",
+        "parent": "",
         "screenshots": [],
         "dependencies": []
     }
