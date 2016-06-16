@@ -24,6 +24,8 @@
 
 package org.fountainmc.forge;
 
+import static org.spongepowered.asm.mixin.MixinEnvironment.CompatibilityLevel.JAVA_8;
+
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -35,6 +37,7 @@ public class FountainCoremod implements IFMLLoadingPlugin {
 
     public FountainCoremod() {
         MixinBootstrap.init();
+        MixinEnvironment.setCompatibilityLevel(JAVA_8);
 
         MixinEnvironment.getDefaultEnvironment()
                 .addConfiguration("mixins.fountain.json");
