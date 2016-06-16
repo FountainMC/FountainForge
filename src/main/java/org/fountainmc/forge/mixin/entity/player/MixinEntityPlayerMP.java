@@ -44,7 +44,6 @@ public abstract class MixinEntityPlayerMP implements Player, ICommandSender {
     @Shadow
     public abstract UUID shadow$getUniqueID();
 
-    @Intrinsic
     @Nonnull
     @Override
     public String getName() {
