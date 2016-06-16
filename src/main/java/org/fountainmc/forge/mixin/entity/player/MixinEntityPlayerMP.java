@@ -42,26 +42,28 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinEntityPlayerMP implements Player, ICommandSender {
 
     @Shadow
-    public abstract String shadow$getName();
+    public abstract String getName();
 
     @Shadow
-    public abstract UUID shadow$getUniqueID();
+    public abstract UUID getUniqueID();
 
     @Intrinsic
     public String player$getName() {
-        return this.shadow$getName();
+        return this.getName();
     }
 
     @Override
     @Nonnull
     public UUID getUUID() {
-        return this.shadow$getUniqueID();
+        return this.getUniqueID();
     }
 
+    @Override
     public void sendMessage(String s) {
         this.sendMessages(s);
     }
 
+    @Override
     public void sendMessages(String... messages) {
         for (String message : messages) {
             this.addChatMessage(new TextComponentString(message));
