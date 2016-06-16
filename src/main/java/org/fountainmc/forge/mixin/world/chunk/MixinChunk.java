@@ -22,32 +22,39 @@
  * THE SOFTWARE.
  */
 
-package org.fountainmc.forge.mixin.world;
+package org.fountainmc.forge.mixin.world.chunk;
 
-import net.minecraft.world.storage.WorldInfo;
 import org.fountainmc.api.world.Chunk;
 import org.fountainmc.api.world.World;
 import org.fountainmc.api.world.block.BlockState;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(net.minecraft.world.World.class)
-public abstract class MixinWorld implements World {
+@Mixin(net.minecraft.world.chunk.Chunk.class)
+public abstract class MixinChunk implements Chunk {
+
+    @Shadow @Final public int xPosition;
+    @Shadow @Final public int zPosition;
 
     @Shadow
-    public abstract WorldInfo getWorldInfo();
-
-    @Shadow
-    public abstract net.minecraft.world.chunk.Chunk getChunkFromChunkCoords(int chunkX, int chunkZ);
+    public abstract net.minecraft.world.World shadow$getWorld();
 
     @Override
-    public String getName() {
-        return this.getWorldInfo().getWorldName();
+    public int getX() {
+        return this.zPosition;
     }
 
     @Override
-    public Chunk getChunk(int i, int i1) {
-        return (Chunk) this.getChunkFromChunkCoords(i, i1);
+    public int getZ() {
+        return this.zPosition;
+    }
+
+    @Intrinsic
+    @Override
+    public World getWorld() {
+        return (World) this.shadow$getWorld();
     }
 
     @Override

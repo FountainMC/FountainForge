@@ -5,6 +5,7 @@
     "refmap": "mixins.fountain.refmap.json",
     "mixins": [
         "entity.MixinEntity",
+        "world.chunk.MixinChunk",
         "world.MixinWorld"
     ],
     "injectors": {
