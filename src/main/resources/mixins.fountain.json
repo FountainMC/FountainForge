@@ -5,8 +5,10 @@
     "refmap": "mixins.fountain.refmap.json",
     "mixins": [
         "entity.MixinEntity",
+        "entity.MixinEntityLivingBase",
         "world.chunk.MixinChunk",
-        "world.MixinWorld"
+        "world.MixinWorld",
+        "entity.player.MixinEntityPlayerMP"
     ],
     "injectors": {
         "defaultRequire": 1
