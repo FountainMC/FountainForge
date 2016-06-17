@@ -51,7 +51,8 @@ public abstract class MixinWorld implements World {
     }
 
     @Override
-    public BlockState getBlockAt(int i, int i1, int i2) {
-        return null;
+    public BlockState getBlockAt(int x, int y, int z) {
+        return getChunk(x >> 4, z >> 4).getBlockAt(x, x, z);
     }
+
 }

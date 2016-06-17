@@ -61,4 +61,5 @@ public abstract class MixinChunk implements Chunk {
     public BlockState getBlockAt(int i, int i1, int i2) {
         return null;
     }
+
 }

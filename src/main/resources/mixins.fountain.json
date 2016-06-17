@@ -6,9 +6,10 @@
     "mixins": [
         "entity.MixinEntity",
         "entity.MixinEntityLivingBase",
+        "entity.player.MixinEntityPlayerMP",
         "world.chunk.MixinChunk",
         "world.MixinWorld",
-        "entity.player.MixinEntityPlayerMP"
+        "server.MixinMinecraftServer"
     ],
     "injectors": {
         "defaultRequire": 1
