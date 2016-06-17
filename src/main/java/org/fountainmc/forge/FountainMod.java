@@ -34,4 +34,5 @@ public class FountainMod extends DummyModContainer {
         this.getMetadata().modId = "fountain";
         this.getMetadata().name = "FountainForge";
     }
+
 }

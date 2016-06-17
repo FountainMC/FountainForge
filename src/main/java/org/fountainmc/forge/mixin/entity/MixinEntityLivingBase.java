@@ -49,4 +49,5 @@ public abstract class MixinEntityLivingBase implements EntityLiving {
     public void setHealth(int i) {
         this.shadow$setHealth((float) i);
     }
+
 }
