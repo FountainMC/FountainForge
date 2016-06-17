@@ -1,0 +1,3 @@
+[submodule "FountainAPI"]
+	path = FountainAPI
+	url = https://github.com/FountainMC/FountainAPI.git

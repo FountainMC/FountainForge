@@ -39,16 +39,12 @@ ext.url = 'https://fountainmc.org/'
 repositories {
     mavenCentral()
     maven {
-        url 'https://repo.techcable.net/content/groups/public/'
-    }
-    maven {
-        name = 'sponge'
-        url = 'http://repo.spongepowered.org/maven'
+        url 'http://repo.spongepowered.org/maven'
     }
 }
 
 dependencies {
-    compile "org.fountainmc:fountain-api:${project.version}"
+    compile project(':FountainAPI')
 
     compile('org.spongepowered:mixin:0.5.1-SNAPSHOT') {
         exclude module: 'launchwrapper'
@@ -75,6 +71,10 @@ sourceSets {
     main {
         refMap = 'mixins.fountain.refmap.json'
     }
+}
+
+project(':FountainAPI') {
+    apply from: rootProject.file('api.gradle')
 }
 
 processResources {

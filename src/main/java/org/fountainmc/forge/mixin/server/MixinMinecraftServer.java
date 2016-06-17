@@ -24,15 +24,11 @@
 
 package org.fountainmc.forge.mixin.server;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableList;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.management.PlayerList;
+import org.apache.commons.lang3.NotImplementedException;
 import org.fountainmc.api.Material;
 import org.fountainmc.api.Server;
 import org.fountainmc.api.command.CommandManager;
@@ -42,6 +38,11 @@ import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Mixin(net.minecraft.server.MinecraftServer.class)
 @Implements(@Interface(iface = Server.class, prefix = "server$"))
@@ -65,12 +66,11 @@ public abstract class MixinMinecraftServer implements Server, ICommandSender {
     @Shadow
     public abstract int getServerPort();
 
-    private final PluginManager pluginManager = new PluginManager();
     private final CommandManager commandManager = new CommandManager();
 
     @Override
     public PluginManager getPluginManager() {
-        return pluginManager;
+        throw new NotImplementedException("getPluginManager");
     }
 
     @Override

@@ -24,13 +24,13 @@
 
 package org.fountainmc.forge.mixin.entity;
 
-import org.fountainmc.api.entity.EntityLiving;
+import org.fountainmc.api.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Intrinsic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(net.minecraft.entity.EntityLivingBase.class)
-public abstract class MixinEntityLivingBase implements EntityLiving {
+public abstract class MixinEntityLivingBase implements LivingEntity {
 
     @Shadow
     public abstract float shadow$getHealth();
@@ -40,13 +40,13 @@ public abstract class MixinEntityLivingBase implements EntityLiving {
 
     @Intrinsic
     @Override
-    public int getHealth() {
-        return Math.round(this.shadow$getHealth());
+    public double getHealth() {
+        return this.shadow$getHealth();
     }
 
     @Intrinsic
     @Override
-    public void setHealth(int i) {
+    public void setHealth(double i) {
         this.shadow$setHealth((float) i);
     }
 
