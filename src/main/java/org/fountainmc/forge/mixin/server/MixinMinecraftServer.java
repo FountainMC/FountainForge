@@ -95,7 +95,7 @@ public abstract class MixinMinecraftServer implements Server, ICommandSender {
     }
 
     @Intrinsic
-    public String player$getName() {
+    public String server$getName() {
         return this.getName();
     }
 
